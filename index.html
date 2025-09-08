@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkHub - Repository Pengetahuan Pribadi</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Ikon dari Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i data-feather="bookmark"></i> LinkHub</h1>
+            <p>Repository pengetahuan pribadi Anda. Disimpan dengan aman di GitHub.</p>
+        </header>
+
+        <div id="auth-screen" class="auth-screen">
+            <div class="auth-box">
+                <h2>Setup Awal</h2>
+                <p>Hubungkan dengan GitHub Anda untuk mulai menyimpan link.</p>
+                <form id="auth-form">
+                    <div class="input-group">
+                        <label for="github-username">Username GitHub</label>
+                        <input type="text" id="github-username" required placeholder="usernameAnda">
+                    </div>
+                    <div class="input-group">
+                        <label for="github-token">Personal Access Token</label>
+                        <input type="password" id="github-token" required placeholder="ghp_xxxxxxxxxxxxxxxx">
+                        <small>Token membutuhkan scope <code>repo</code>. <a href="https://github.com/settings/tokens" target="_blank">Buat Token</a></small>
+                    </div>
+                    <div class="input-group">
+                        <label for="repo-name">Nama Repository (yang sudah ada)</label>
+                        <input type="text" id="repo-name" required value="linkhub">
+                    </div>
+                    <button type="submit">Simpan & Muat Data</button>
+                </form>
+            </div>
+        </div>
+
+        <main id="app-content" class="app-content hidden">
+            <div class="controls">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Cari berdasarkan judul, tag, atau catatan...">
+                    <i data-feather="search"></i>
+                </div>
+                <button id="add-new-btn" class="btn-primary"><i data-feather="plus"></i> Add New Link</button>
+            </div>
+
+            <div id="links-container" class="links-container">
+                <!-- Daftar link akan dimuat di sini oleh JavaScript -->
+                <div class="loading-state" id="loading-state">
+                    <i data-feather="loader" class="spin"></i>
+                    <p>Memuat link...</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modal untuk Add/Edit Link -->
+        <div id="link-modal" class="modal">
+            <div class="modal-content">
+                <h2 id="modal-title">Tambah Link Baru</h2>
+                <form id="link-form">
+                    <input type="hidden" id="edit-id">
+                    <div class="input-group">
+                        <label for="link-title">Judul</label>
+                        <input type="text" id="link-title" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="link-url">URL</label>
+                        <input type="url" id="link-url" required placeholder="https://">
+                    </div>
+                    <div class="input-group">
+                        <label for="link-tags">Tags (pisahkan dengan koma)</label>
+                        <input type="text" id="link-tags" placeholder="programming, web, tutorial">
+                    </div>
+                    <div class="input-group">
+                        <label for="link-notes">Catatan Pribadi</label>
+                        <textarea id="link-notes" rows="3"></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" id="modal-cancel" class="btn-secondary">Batal</button>
+                        <button type="submit" id="modal-save">Simpan Link</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        feather.replace(); // Inisialisasi ikon
+    </script>
+</body>
+</html>
